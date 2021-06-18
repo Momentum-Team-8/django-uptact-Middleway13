@@ -10,7 +10,7 @@ def list_contacts(request):
                     {"contacts": contacts})
 
 
-def add_contact(request):
+def add_contact(request, pk):
     if request.method == 'GET':
         form = ContactForm()
     else:
@@ -46,3 +46,9 @@ def delete_contact(request, pk):
 
     return render(request, "contacts/delete_contact.html",
                   {"contact": contact})
+    
+
+def show_contact(request, pk):
+    contact = get_object_or_404(Contact, pk=pk)
+    form = NoteForm()
+    return render(request, "contacts/show_contact.html", {"contact": contact, "pk": pk, "form": form})
